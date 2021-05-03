@@ -1,0 +1,32 @@
+.auctionDiv {
+    display: flex;
+    margin-top: 5%;
+    margin-right: 30%;
+    margin-left: 30%;
+    background-color: #F5F5F5;
+    border: 3px solid black ;
+    border-radius: 15px;
+}
+.image{
+    border: 1px solid black;
+    flex:1;
+}
+
+.textDiv{
+    flex: 1;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.text{
+    color : #8A2BE2;
+}
+.textCursor {
+    cursor: pointer;
+    color : #8A2BE2;
+}
+.textCursor:hover {
+    background-color:#8A2BE2;
+    color: #F5F5F5;
+}
+

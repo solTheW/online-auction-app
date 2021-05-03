@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+.NavBarDiv {
+    position: relative;
+    height: 5%;
+    width: 90%;
+    box-sizing: border-box;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: #F5F5F5;
+    display:inline-flex;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 30px;
+}
+
+.LogOutLink {
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    right: 0px;
+    margin-right: 5%;;
+    margin-top: 7px;
+    margin-bottom: 7.5px;
+    display: inline;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 30px;
+}
