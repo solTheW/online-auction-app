@@ -31,59 +31,57 @@ const AuctionCreation = () => {
     return (
         <div id="creationMainDiv">
             <form method="get" onSubmit={handleSubmit}>
-                <label>
-                    Item
-                    <input 
-                        className="inputBox" 
-                        type="text" 
-                        placeholder="Item name" 
-                        value={name} 
-                        onChange={handleChangeName}
+                <div className="inputBoxDiv">
+                Item<br/>
+                <input 
+                    className="inputBoxCreationItem" 
+                    type="text" 
+                    placeholder="Item name" 
+                    value={name} 
+                    onChange={handleChangeName}
+                />
+                </div>
+                <hr/>
+                <div  className="inputBoxDiv">
+                Price<br/>
+                <input 
+                    className="inputBoxCreationPrice" 
+                    type="number" 
+                    placeholder="Item basic price" 
+                    value={price} 
+                    onChange={handleChangePrice}
+                />
+                </div>
+                <hr/>
+                <div className="inputBoxDiv">
+                Description<br/>
+                <input 
+                    className="inputBoxCreationDesc" 
+                    type="text" 
+                    placeholder="Description" 
+                    value={description} 
+                    onChange={handleChangeDescription}
                     />
-                    <br/>
-                </label>
-                
-                <label>
-                    Price
-                    <input 
-                        className="inputBox" 
-                        type="number" 
-                        placeholder="Item basic price" 
-                        value={price} 
-                        onChange={handleChangePrice}
-                    />
-                    <br/>
-                </label>
-                
-                <label>
-                    Description
-                    <input 
-                        className="inputBox" 
-                        type="text" 
-                        placeholder="Description" 
-                        value={description} 
-                        onChange={handleChangeDescription}
-                    />
-                    <br/>
-                </label>
+                </div>
+                <hr/>
+            
+            <div className="inputBoxDiv">
+                Photo    
+                <input 
+                    id="photoSelect"
+                    type="file"
+                    onChange={handleChangePhoto}
+                />
+            </div>
+            <hr/>
 
-                <label>
-                    Photo
-                    
-                    <input 
-                        id="photoSelect"
-                        type="file"
-                        onChange={handleChangePhoto}
-                        dataButtonText="a"
-                        />
-                    <br/>
-                </label>
-                
-                    <input 
+            <div className="createDiv">
+                <input
                     type="submit" 
                     id="createBtn" 
                     value="Create"
-                    />
+                />
+            </div>
             </form>
         </div>
     )

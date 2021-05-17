@@ -1,0 +1,20 @@
+#chatDiv{
+    display: table;
+    width: fit-content;
+    height: fit-content;
+    margin: 5% auto;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+#userListDiv {
+    float: left;
+    cursor: pointer;
+}
+#messegesDiv {
+    border: 2px solid #8A2BE2;
+    border-radius: 20px;
+    margin: 40px auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    float: left;
+}
