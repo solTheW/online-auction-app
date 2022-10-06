@@ -1,41 +1,52 @@
-import NavBar from "./Navbar/NavBar";
-import Auctions from "./Auctions/Auctions";
-import Chat from "./Chat/Chat";
-import Login from "./Login/Login";
-import AuctionCreation from "./AuctionCreation/AuctionCreation";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import {useState, useEffect} from "react";
-import RingLoader from "react-spinners/RingLoader";
-function App() {
-  const [loading, setLoading] = useState(true);
-  useEffect(()=> {
-    setLoading(true);
-    setTimeout(()=>{
-      setLoading(false)
-    },8000)
-  },[])
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from './state/UserContext'
 
-  return (
-    loading?
-      <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "20vh"}}>
-        <RingLoader color={'#8A2BE2'} loading={loading} size={600}/>
-      </div>:
-    <div style={{marginBottom:"5%"}}>
-      <Router >
+import NavBar from './Navbar/NavBar'
+import Auctions from './Auctions/Auctions'
+import Chat from './Chat/Chat'
+import Login from './Login/Login'
+import Logout from './Logout/Logout'
+import AuctionCreation from './AuctionCreation/AuctionCreation'
+
+const App = () => {
+  const { isLogedIn, isAdmin } = useContext(UserContext)
+  if (!isLogedIn)
+    return (
+      <Router>
+        <Route>
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/login" component={Login} />
+      </Router>
+    )
+  if (!isAdmin)
+    return (
+      <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/">
-            <Redirect to="/login" />
-          </Route>
-            <Route path="/login" component={Login}/>
-            <Route path="/auctions" component={Auctions} />
-            <Route path="/chat" component={Chat} />
-            <Route path="/createAuction" component={AuctionCreation} />
+          <Route path="/auctions" component={Auctions} />
+          <Route path="/chat" component={Chat} />
+          <Route path="/logout" component={Logout} />
         </Switch>
       </Router>
-
-    </div>
-  );
+    )
+  return (
+    <Router>
+      <NavBar />
+      <Switch>
+        <Route path="/auctions" component={Auctions} />
+        <Route path="/chat" component={Chat} />
+      </Switch>
+      <Route path="/createAuction" component={AuctionCreation} />
+      <Route path="/logout" component={Logout} />
+    </Router>
+  )
 }
 
-export default App;
+export default App

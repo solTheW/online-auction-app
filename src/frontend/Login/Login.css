@@ -1,37 +1,37 @@
 #loginDiv {
-    width: fit-content;
-    height: fit-content;
-    margin: auto;
-    margin-top: 20%;
-    text-align: center;
-    border: 3px solid black;
-    border-radius: 30px;
-    box-shadow: 3px 3px 3px;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  margin-top: 20%;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 30px;
+  box-shadow: 3px 3px 3px;
 }
-.inputBox{
-    outline: none;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 30px;
-    border: 2px solid;
-    border-radius: 30px;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-top: 40px;
-    padding-left: 40px;
-    background-color: #F5F5F5;
+.inputBox {
+  outline: none;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  border: 2px solid;
+  border-radius: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 40px;
+  padding-left: 40px;
+  background-color: #f5f5f5;
 }
-#submitBtn{
-    width: 200px;
-    height: 40px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 30px;
-    color: white;
-    background-color: #8A2BE2;
-    border-radius: 20px;
+#submitBtn {
+  width: 200px;
+  height: 40px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  color: white;
+  background-color: #8a2be2;
+  border-radius: 20px;
 }
-#submitBtn:hover{
-    background-color:black;
-    color:white;
+#submitBtn:hover {
+  background-color: black;
+  color: white;
 }

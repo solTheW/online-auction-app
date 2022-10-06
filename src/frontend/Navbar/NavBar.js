@@ -1,32 +1,61 @@
-import "./NavBar.css";
-import {Link} from "react-router-dom";
-const typeOfUser = "admin";
-const linkStyle= {
-    color: "inherit",
-    textDecoration: "none",
-    marginLeft: "5%",
-    marginRight: "5%",
-    marginTop: "7px",
-    marginBottom: "7.5px",
-    display: "inline",
-    visited: {
-        textDecoration: "none"
-    },
-}
-
+import './NavBar.css'
+import { Link, useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from '../state/UserContext'
 
 const NavBar = () => {
-    return (
-        <div className="NavBarDiv">
-            <Link style={linkStyle} to="/auctions">Auctions</Link><br/>
-            <Link style={linkStyle} to="/chat">Chat</Link><br/>
-            {
-            typeOfUser==="admin"?
-                <Link style={linkStyle} to="/createAuction">Create auction</Link>
-                :null
-            }
-            <Link className="LogOutLink" to="/logout">Log out</Link>
-        </div>
-    )
+  const { isAdmin } = useContext(UserContext)
+  const currentRoute = useLocation()
+  return (
+    <div className="NavBarDiv">
+      <Link
+        style={
+          currentRoute.pathname.includes('auctions') ? { ...styles } : undefined
+        }
+        className="Link"
+        to="/auctions"
+      >
+        Auctions
+      </Link>
+      <br />
+      <Link
+        style={
+          currentRoute.pathname.includes('chat') ? { ...styles } : undefined
+        }
+        className="Link"
+        to="/chat"
+      >
+        Chat
+      </Link>
+      <br />
+      {isAdmin ? (
+        <Link
+          style={
+            currentRoute.pathname.includes('createAuction')
+              ? { ...styles }
+              : undefined
+          }
+          className="Link"
+          to="/createAuction"
+        >
+          Create auction
+        </Link>
+      ) : null}
+      <Link
+        style={
+          currentRoute.pathname.includes('logout') ? { ...styles } : undefined
+        }
+        className="LogOutLink"
+        to="/logout"
+      >
+        Log out
+      </Link>
+    </div>
+  )
 }
-export default NavBar; 
+const styles = {
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 3,
+  borderBottomColor: '#8A2BE2',
+}
+export default NavBar

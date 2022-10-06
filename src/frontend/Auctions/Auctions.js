@@ -1,37 +1,45 @@
-import AuctionItem from "./AuctionItem/AuctionItem";
-import "./Auctions.css";
+import { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
-const AuctionsData = [
-    {
-        id:1,
-        name: "Bike",
-        image: "",
-        value: 100,
-        desc: "I am selling new bike, greate for kids.",
-    },
-    {        
-        id:2,
-        name: "Shoes",
-        image: "",
-        value: 200,
-        desc: "I am selling new shoes.",
-    },
-    {        
-        id:3,
-        name: "Laptop",
-        image: "",
-        value: 1000,
-        desc: "I am selling new laptop.",
-    },
-]
+import AuctionItem from './AuctionItem/AuctionItem'
+import './Auctions.css'
+import { UserContext } from '../state/UserContext'
+import Loader from '../Loader/Loader'
+
 const Auctions = () => {
-    const auctionsList = AuctionsData.map(el=>{
-       return <AuctionItem key={el.id} id ={el.id} name={el.name} value={el.value} desc={el.desc} />
+  const { isLoading, setIsLoading } = useContext(UserContext)
+  const [auctions, setAuctions] = useState([])
+
+  useEffect(() => {
+    setIsLoading(true)
+    axios
+      .get('http://localhost:8080/auctions/')
+      .then((res) => {
+        setAuctions(res.data)
+        setIsLoading(false)
+      })
+      .catch((e) => {
+        setAuctions([])
+        setIsLoading(false)
+      })
+  }, [])
+
+  if (isLoading) {
+    return <Loader />
+  } else {
+    const auctionsList = auctions.map((el) => {
+      return (
+        <AuctionItem
+          key={el.id}
+          id={el.id}
+          name={el.name}
+          value={el.value}
+          desc={el.desc}
+        />
+      )
     })
-    return (
-        <div id="auctionsListDiv">
-        {auctionsList}    
-        </div>
-    )
+    return <div id="auctionsListDiv">{auctionsList}</div>
+  }
 }
-export default Auctions;
+
+export default Auctions

@@ -1,12 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./frontend/App";
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './frontend/App'
+import { UserContextProvider } from './frontend/state/UserContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserContextProvider>
+      <App />
+    </UserContextProvider>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root'),
+)

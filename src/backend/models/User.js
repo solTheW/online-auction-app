@@ -1,19 +1,10 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    isAdmin: {
-        type: Boolean,
-        required: true
+const parseUsers = (usersSchema) =>
+  usersSchema.map((userSchema) => {
+    return {
+      username: userSchema.username ?? '',
+      password: userSchema.password ?? '',
+      isAdmin: userSchema.isAdmin ?? '',
     }
-});
-const User = mongoose.model("users", UserSchema);
-module.exports = User;
+  })
+
+export default parseUsers
