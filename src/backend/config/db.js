@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb')
 const url =
   'mongodb+srv://admin:admin@cluster0.puoic.mongodb.net/bachelor-thesis?retryWrites=true&w=majority'
-const client = new MongoClient(url)
+const client = new MongoClient(url, { useUnifiedTopology: true })
 const dbName = 'bachelor-thesis'
 
 const connect = async () => {

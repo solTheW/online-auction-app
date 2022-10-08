@@ -8,6 +8,7 @@ const Logout = () => {
   const handleClick = () => {
     setIsLogedIn(false)
     setIsLoading(false)
+    setIsAdmin(false)
     history.push('/login')
   }
   return (

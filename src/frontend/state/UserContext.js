@@ -5,6 +5,8 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
+  const port = process.env.PORT || 8080
+  const url = process.env.baseUrl || `http://localhost:${port}`
 
   return (
     <UserContext.Provider
@@ -15,6 +17,7 @@ const UserContextProvider = ({ children }) => {
         setIsAdmin,
         isLogedIn,
         setIsLogedIn,
+        url,
       }}
     >
       {children}

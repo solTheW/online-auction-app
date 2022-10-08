@@ -39,13 +39,13 @@ const messages = [
 ]
 
 const Chat = () => {
-  const { isLoading, setIsLoading } = useContext(UserContext)
+  const { isLoading, setIsLoading, url } = useContext(UserContext)
   const [users, setUsers] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
     axios
-      .get('http://localhost:8080/users/')
+      .get(`${url}/users/`)
       .then((res) => {
         setIsLoading(false)
         setUsers(res)

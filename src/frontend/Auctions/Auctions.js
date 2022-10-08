@@ -7,13 +7,13 @@ import { UserContext } from '../state/UserContext'
 import Loader from '../Loader/Loader'
 
 const Auctions = () => {
-  const { isLoading, setIsLoading } = useContext(UserContext)
+  const { isLoading, setIsLoading, url } = useContext(UserContext)
   const [auctions, setAuctions] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
     axios
-      .get('http://localhost:8080/auctions/')
+      .get(`${url}/auctions/`)
       .then((res) => {
         setAuctions(res.data)
         setIsLoading(false)
@@ -22,6 +22,7 @@ const Auctions = () => {
         setAuctions([])
         setIsLoading(false)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (isLoading) {

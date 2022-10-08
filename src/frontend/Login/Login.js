@@ -12,6 +12,7 @@ const Login = () => {
     setIsAdmin,
     setIsLogedIn,
     isLogedIn,
+    url,
   } = useContext(UserContext)
   const history = useHistory()
   const [name, setName] = useState('')
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post('http://localhost:8080/login', {
+      .post(`${url}/login`, {
         username: name,
         password: password,
       })
