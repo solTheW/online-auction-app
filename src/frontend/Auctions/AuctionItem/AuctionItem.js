@@ -1,12 +1,34 @@
+import { initializeApp } from 'firebase/app'
+import { getDownloadURL, getStorage, ref } from 'firebase/storage'
+import { useContext, useEffect, useState } from 'react'
+import { ClipLoader } from 'react-spinners'
+import { UserContext } from '../../state/UserContext'
 import './AuctionItem.css'
-import { useState } from 'react'
 const AuctionItem = ({ id, name, image, value, desc }) => {
-  console.log('image: ', image)
   const [counter, setCounter] = useState(value)
+  const [imageUrl, setImageUrl] = useState(null)
+  const { firebaseConfig } = useContext(UserContext)
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig)
+    const storage = getStorage(app)
+
+    const storageReference = ref(storage, image)
+    getDownloadURL(storageReference)
+      .then((r) => {
+        setImageUrl(r)
+      })
+      .catch((e) => {
+        console.error(e)
+        setImageUrl('')
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="auctionDiv">
       <div className="image">
-        <img src={image} alt="Item" />
+        {imageUrl === null ? <ClipLoader /> : <img src={imageUrl} alt="Item" />}
       </div>
       <div className="textDiv">
         <h1 className="text">{name}</h1>

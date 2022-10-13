@@ -1,32 +1,32 @@
 .auctionDiv {
-    display: flex;
-    margin-top: 5%;
-    margin-right: 30%;
-    margin-left: 30%;
-    background-color: #F5F5F5;
-    border: 3px solid black ;
-    border-radius: 15px;
+  flex: 1;
+  display: flex;
+  margin-top: 5%;
+  margin-right: 30%;
+  margin-left: 30%;
+  background-color: #f5f5f5;
+  border: 3px solid black;
+  border-radius: 15px;
 }
-.image{
-    border: 1px solid black;
-    flex:1;
+.image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.textDiv{
-    flex: 1;
-    text-align: center;
-    margin-bottom: 5%;
+.textDiv {
+  flex: 1;
+  text-align: center;
+  margin-bottom: 5%;
 }
-
-.text{
-    color : #8A2BE2;
+.text {
+  color: #8a2be2;
 }
 .textCursor {
-    cursor: pointer;
-    color : #8A2BE2;
+  cursor: pointer;
+  color: #8a2be2;
 }
 .textCursor:hover {
-    background-color:#8A2BE2;
-    color: #F5F5F5;
+  background-color: #8a2be2;
+  color: #f5f5f5;
 }
-
