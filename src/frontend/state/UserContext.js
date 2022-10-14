@@ -5,9 +5,8 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
-  // const port =  8080
-  // const url = `http://localhost:${port}`
-  const url = 'https://o-a.herokuapp.com'
+  const port = process.env.PORT || 8080
+  const url = `{$process.env.baseUrl}:${port}` || `http://localhost:${port}`
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAJJCpqlEjNVWhPVK7Mb_ZBA5ZhhiyAaA4',
