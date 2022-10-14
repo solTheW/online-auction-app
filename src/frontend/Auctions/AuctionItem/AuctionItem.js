@@ -36,7 +36,6 @@ const AuctionItem = ({ id, name, image, value, desc }) => {
         <h1
           className="textCursor"
           onClick={() => {
-            console.log('Click ID:' + id + ' value: 1')
             setCounter(counter + 1)
           }}
         >
@@ -45,7 +44,6 @@ const AuctionItem = ({ id, name, image, value, desc }) => {
         <h1
           className="textCursor"
           onClick={() => {
-            console.log('Click ID:' + id + ' value: 10')
             setCounter(counter + 10)
           }}
         >
@@ -54,7 +52,6 @@ const AuctionItem = ({ id, name, image, value, desc }) => {
         <h1
           className="textCursor"
           onClick={() => {
-            console.log('Click ID:' + id + ' value: 100')
             setCounter(counter + 100)
           }}
         >
