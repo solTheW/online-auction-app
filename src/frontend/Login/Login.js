@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
-import './Login.css'
 import axios from 'axios'
-import { UserContext } from '../state/UserContext'
-import Loader from '../Loader/Loader'
+import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import Loader from '../Loader/Loader'
+import { UserContext } from '../state/UserContext'
+import './Login.css'
 
 const Login = () => {
   const {
@@ -20,6 +20,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('url: ', url)
     axios
       .post(`${url}/login`, {
         username: name,
