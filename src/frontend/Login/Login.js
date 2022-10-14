@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault()
     console.log('url: ', url)
     axios
-      .post(`${url}/login`, {
+      .post(`/login`, {
         username: name,
         password: password,
       })
