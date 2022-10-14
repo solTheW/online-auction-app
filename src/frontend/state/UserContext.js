@@ -5,8 +5,7 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
-  const port = process.env.PORT || 8080
-  const url = `${window.location.origin}:${port}` || `http://localhost:${port}`
+  const url = `${window.location.origin}`
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAJJCpqlEjNVWhPVK7Mb_ZBA5ZhhiyAaA4',
