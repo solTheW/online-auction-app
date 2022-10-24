@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post('/login', {
+      .post(`${process.env.PORT}/login`, {
         username: name,
         password: password,
       })
