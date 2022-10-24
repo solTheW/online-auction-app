@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
-import './Chat.css'
-import Message from './Message/Message'
-import UserListItem from './UserListItem/UserListItem'
 import Loader from '../Loader/Loader'
+import './Chat.css'
+import UserListItem from './UserListItem/UserListItem'
 
-import { UserContext } from '../state/UserContext'
 import axios from 'axios'
+import { UserContext } from '../state/UserContext'
 
 const usersArray = [
   {
@@ -39,13 +38,13 @@ const messages = [
 ]
 
 const Chat = () => {
-  const { isLoading, setIsLoading, url } = useContext(UserContext)
+  const { isLoading, setIsLoading } = useContext(UserContext)
   const [users, setUsers] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
     axios
-      .get(`${url}/users/`)
+      .get(`users/`)
       .then((res) => {
         setIsLoading(false)
         setUsers(res)

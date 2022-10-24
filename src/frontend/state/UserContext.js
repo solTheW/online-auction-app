@@ -5,7 +5,6 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
-  const url = process.env.BASE_URL
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAJJCpqlEjNVWhPVK7Mb_ZBA5ZhhiyAaA4',
@@ -25,7 +24,6 @@ const UserContextProvider = ({ children }) => {
         setIsAdmin,
         isLogedIn,
         setIsLogedIn,
-        url,
         firebaseConfig,
       }}
     >
