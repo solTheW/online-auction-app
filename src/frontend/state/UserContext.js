@@ -6,8 +6,8 @@ const UserContextProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
   const port = process.env.PORT || 8080
-  const url = process.env.URL
-    ? `${process.env.URL}:${port}`
+  const url = process.env.APP_URL
+    ? `${process.env.APP_URL}:${port}`
     : `http://localhost:${port}`
 
   const firebaseConfig = {
