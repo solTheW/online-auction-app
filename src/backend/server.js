@@ -29,7 +29,7 @@ app.post('/api/login', (req, res) => {
     .catch(() => res.send({ message: 'Not registered!!!' }))
 })
 
-app.get('/api/auctions/', (req, res) => {
+app.get('/api/auctions', (req, res) => {
   db.getAuctions()
     .then((auctions) => res.send(auctions))
     .catch(() => res.send([]))

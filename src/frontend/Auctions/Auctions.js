@@ -13,7 +13,7 @@ const Auctions = () => {
   useEffect(() => {
     setIsLoading(true)
     axios
-      .get('/api/auctions/')
+      .get('/api/auctions')
       .then((res) => {
         setAuctions(res.data)
         setIsLoading(false)
