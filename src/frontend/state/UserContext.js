@@ -5,6 +5,10 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
+  const port = process.env.PORT || 8080
+  const url = process.env.URL
+    ? `${process.env.URL}:${port}`
+    : `http://localhost:${port}`
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAJJCpqlEjNVWhPVK7Mb_ZBA5ZhhiyAaA4',
@@ -25,6 +29,7 @@ const UserContextProvider = ({ children }) => {
         isLogedIn,
         setIsLogedIn,
         firebaseConfig,
+        url,
       }}
     >
       {children}
