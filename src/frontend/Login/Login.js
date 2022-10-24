@@ -20,6 +20,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('url: ', url)
     axios
       .post(`${url}/login`, {
         username: name,
