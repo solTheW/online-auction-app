@@ -5,7 +5,7 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
-  const port = process.env.PORT || 8080
+  const port = process.env.PORT || 1234
   const url = process.env.REACT_APP_APP_URL
     ? `${process.env.APP_URL}:${port}`
     : `http://localhost:${port}`
