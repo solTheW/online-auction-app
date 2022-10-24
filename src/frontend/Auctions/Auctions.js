@@ -7,13 +7,13 @@ import AuctionItem from './AuctionItem/AuctionItem'
 import './Auctions.css'
 
 const Auctions = () => {
-  const { isLoading, setIsLoading, url } = useContext(UserContext)
+  const { isLoading, setIsLoading } = useContext(UserContext)
   const [auctions, setAuctions] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
     axios
-      .get(`${url}/auctions/`)
+      .get('/api/auctions/')
       .then((res) => {
         setAuctions(res.data)
         setIsLoading(false)

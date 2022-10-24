@@ -2,14 +2,14 @@ const db = require('./config/db')
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 
 db.connect()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const { username, password } = req.body
   db.findUser({ username, password })
     .then((user) => {
@@ -22,12 +22,12 @@ app.post('/login', (req, res) => {
     .catch(() => res.send({ message: 'Not registered!!!' }))
 })
 
-app.get('/auctions/', (req, res) => {
+app.get('/api/auctions/', (req, res) => {
   db.getAuctions()
     .then((auctions) => res.send(auctions))
     .catch(() => res.send([]))
 })
-app.get('/users/', (req, res) => {
+app.get('/api/users/', (req, res) => {
   db.getUsers()
     .then((users) => res.send(users))
     .catch(() => res.send([]))
