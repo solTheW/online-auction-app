@@ -1,13 +1,21 @@
 const db = require('./config/db')
+const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 8080
 
 db.connect()
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(cors())
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+  })
+} else {
+  app.use(express.json())
+  app.use(express.urlencoded())
+  app.use(cors())
+}
 
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body
