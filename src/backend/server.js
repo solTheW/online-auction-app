@@ -31,10 +31,17 @@ app.get('/api/auctions', (req, res) => {
     .then((auctions) => res.send(auctions))
     .catch(() => res.send([]))
 })
+
 app.get('/api/users/', (req, res) => {
   db.getUsers()
     .then((users) => res.send(users))
     .catch(() => res.send([]))
+})
+
+app.put('/api/auction', (req, res) => {
+  db.uploadAuction(req.body)
+    .then((res) => res.send(res))
+    .catch((e) => res.send(e))
 })
 
 app.listen(port, () => {

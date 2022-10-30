@@ -27,15 +27,25 @@ const getAuctions = async () => {
   const response = await Auctions.find()
   const auctions = []
   await response.forEach((el) => {
-    auctions.push({
-      id: el._id,
-      name: el.name,
-      value: el.value,
-      desc: el.desc,
-      image: el.image,
-    })
+    if (el.inProgress) {
+      auctions.push({
+        id: el._id,
+        name: el.name,
+        value: el.value,
+        desc: el.desc,
+        image: el.image,
+      })
+    }
   })
   return auctions
+}
+
+const uploadAuction = async (auction) => {
+  const db = client.db(dbName)
+  const Auctions = db.collection('Auctions')
+  await Auctions.insertOne(auction)
+    .then((res) => res)
+    .catch((e) => e)
 }
 
 const getUsers = async () => {
@@ -44,7 +54,6 @@ const getUsers = async () => {
   const response = await Auctions.find({}, { username: 1 })
   const users = []
   await response.forEach((el) => {
-    console.log('el: ', el)
     users.push({
       username: el.username,
     })
@@ -57,4 +66,5 @@ module.exports = {
   findUser,
   getAuctions,
   getUsers,
+  uploadAuction,
 }
