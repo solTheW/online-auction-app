@@ -34,6 +34,7 @@ const getAuctions = async () => {
         value: el.value,
         desc: el.desc,
         image: el.image,
+        inProgress: el.inProgress,
       })
     }
   })
@@ -44,6 +45,34 @@ const uploadAuction = async (auction) => {
   const db = client.db(dbName)
   const Auctions = db.collection('Auctions')
   await Auctions.insertOne(auction)
+    .then((res) => res)
+    .catch((e) => e)
+}
+
+const updateAuctionImage = async (auction) => {
+  const db = client.db(dbName)
+  const Auctions = db.collection('Auctions')
+  await Auctions.updateOne(
+    { image: auction.image },
+    {
+      $set: { inProgress: false },
+      $currentDate: { lastModified: true },
+    },
+  )
+    .then((res) => res)
+    .catch((e) => e)
+}
+
+const updateAuctionPrize = async (auction) => {
+  const db = client.db(dbName)
+  const Auctions = db.collection('Auctions')
+  await Auctions.updateOne(
+    { image: auction.image },
+    {
+      $set: { value: Number.parseInt(auction.value) },
+      $currentDate: { lastModified: true },
+    },
+  )
     .then((res) => res)
     .catch((e) => e)
 }
@@ -67,4 +96,6 @@ module.exports = {
   getAuctions,
   getUsers,
   uploadAuction,
+  updateAuctionImage,
+  updateAuctionPrize,
 }

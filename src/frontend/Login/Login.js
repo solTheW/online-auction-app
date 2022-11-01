@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import { UserContext } from '../state/UserContext'
@@ -17,6 +17,8 @@ const Login = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
+  const usernameRef = useRef(null)
+
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
@@ -32,6 +34,7 @@ const Login = () => {
           alert(res.data.message)
           setName('')
           setPassword('')
+          usernameRef.current.focus()
         } else {
           setIsLogedIn(true)
           history.push('/auctions')
@@ -44,6 +47,7 @@ const Login = () => {
         setIsLogedIn(false)
         setIsLoading(false)
         alert(e)
+        usernameRef.current.focus()
         setName('')
         setPassword('')
       })
@@ -53,6 +57,7 @@ const Login = () => {
     <div id="loginDiv">
       <form method="post" onSubmit={handleSubmit}>
         <input
+          ref={usernameRef}
           className="inputBox"
           type="text"
           name="username"

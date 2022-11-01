@@ -11,6 +11,11 @@ const Auctions = () => {
   const [auctions, setAuctions] = useState([])
 
   useEffect(() => {
+    getAuctions()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const getAuctions = () => {
     setIsLoading(true)
     axios
       .get('/api/auctions')
@@ -22,8 +27,7 @@ const Auctions = () => {
         setAuctions([])
         setIsLoading(false)
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
   if (isLoading) {
     return <Loader />
@@ -37,6 +41,7 @@ const Auctions = () => {
           value={el.value}
           desc={el.desc}
           image={el.image}
+          reload={getAuctions}
         />
       )
     })

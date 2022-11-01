@@ -44,6 +44,18 @@ app.put('/api/auction', (req, res) => {
     .catch((e) => res.send(e))
 })
 
+app.put('/api/auction/update', (req, res) => {
+  db.updateAuctionImage(req.body)
+    .then((res) => res.send(res))
+    .catch((e) => res.send(e))
+})
+
+app.put('/api/auction/updatePrize', (req, res) => {
+  db.updateAuctionPrize(req.body)
+    .then((res) => res.send(res))
+    .catch((e) => res.send(e))
+})
+
 app.listen(port, () => {
   console.log('Listening on port: ' + port)
 })
