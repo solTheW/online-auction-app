@@ -21,6 +21,7 @@
     "react-scripts": "^5.0.1",
     "react-spinners": "^0.10.6",
     "socket.io": "^4.0.1",
+    "socket.io-client": "^4.5.3",
     "validation": "0.0.1",
     "web-vitals": "^1.1.1"
   },

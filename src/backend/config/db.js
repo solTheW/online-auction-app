@@ -77,17 +77,20 @@ const updateAuctionPrize = async (auction) => {
     .catch((e) => e)
 }
 
-const getUsers = async () => {
+const getUsers = async (userId) => {
   const db = client.db(dbName)
   const Auctions = db.collection('Users')
-  const response = await Auctions.find({}, { username: 1 })
+  const response = await Auctions.find({}, { username: 1, _id: 1 })
   const users = []
   await response.forEach((el) => {
     users.push({
       username: el.username,
+      id: el._id,
     })
   })
-  return users
+  return users.filter(
+    (user) => String(user.id).toString() !== String(userId.userId).toString(),
+  )
 }
 
 module.exports = {

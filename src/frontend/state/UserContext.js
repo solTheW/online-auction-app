@@ -5,6 +5,7 @@ const UserContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLogedIn, setIsLogedIn] = useState(false)
+  const [userId, setUserId] = useState(null)
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAJJCpqlEjNVWhPVK7Mb_ZBA5ZhhiyAaA4',
@@ -25,6 +26,8 @@ const UserContextProvider = ({ children }) => {
         isLogedIn,
         setIsLogedIn,
         firebaseConfig,
+        userId,
+        setUserId,
       }}
     >
       {children}

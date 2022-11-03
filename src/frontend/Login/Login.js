@@ -12,6 +12,7 @@ const Login = () => {
     setIsAdmin,
     setIsLogedIn,
     isLogedIn,
+    setUserId,
   } = useContext(UserContext)
   const history = useHistory()
   const [name, setName] = useState('')
@@ -36,6 +37,7 @@ const Login = () => {
           setPassword('')
           usernameRef.current.focus()
         } else {
+          setUserId(user._id)
           setIsLogedIn(true)
           history.push('/auctions')
           if (user.isAdmin) {

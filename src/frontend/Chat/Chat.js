@@ -4,55 +4,30 @@ import './Chat.css'
 import UserListItem from './UserListItem/UserListItem'
 
 import axios from 'axios'
+import io from 'socket.io-client'
 import { UserContext } from '../state/UserContext'
 
-const usersArray = [
-  {
-    id: 1,
-    username: 'Ala',
-  },
-  {
-    id: 2,
-    username: 'Adam',
-  },
-  {
-    id: 3,
-    username: 'Andrzej',
-  },
-  {
-    id: 4,
-    username: 'Wiktoria',
-  },
-  {
-    id: 5,
-    username: 'Mateusz',
-  },
-]
-const messages = [
-  {
-    id: 1,
-    idSender: 1,
-    idRecipient: 2,
-    text: 'Hello',
-  },
-]
-
 const Chat = () => {
-  const { isLoading, setIsLoading } = useContext(UserContext)
+  const { isLoading, setIsLoading, userId } = useContext(UserContext)
   const [users, setUsers] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
+    const socket = io('http://localhost:8081')
+    socket.emit('join')
     axios
-      .get(`users/`)
+      .post(`/api/users/`, { userId })
       .then((res) => {
         setIsLoading(false)
-        setUsers(res)
+        setUsers(res.data)
       })
       .catch((e) => {
         setIsLoading(false)
         setUsers([])
       })
+    return () => {
+      setUsers([])
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
