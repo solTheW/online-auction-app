@@ -79,8 +79,8 @@ const updateAuctionPrize = async (auction) => {
 
 const getUsers = async (userId) => {
   const db = client.db(dbName)
-  const Auctions = db.collection('Users')
-  const response = await Auctions.find({}, { username: 1, _id: 1 })
+  const Users = db.collection('Users')
+  const response = await Users.find({}, { username: 1, _id: 1 })
   const users = []
   await response.forEach((el) => {
     users.push({
@@ -93,11 +93,23 @@ const getUsers = async (userId) => {
   )
 }
 
+const getMessages = async (req) => {
+  const db = client.db(dbName)
+  const Messages = db.collection('Messages')
+  const response = await Messages.find({ from: req.from, to: req.to })
+  const messages = []
+  await response.forEach((el) => {
+    messages.push(el)
+  })
+  return messages
+}
+
 module.exports = {
   connect,
   findUser,
-  getAuctions,
   getUsers,
+  getMessages,
+  getAuctions,
   uploadAuction,
   updateAuctionImage,
   updateAuctionPrize,

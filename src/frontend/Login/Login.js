@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import io from 'socket.io-client'
 import Loader from '../Loader/Loader'
 import { UserContext } from '../state/UserContext'
 import './Login.css'
@@ -13,13 +14,13 @@ const Login = () => {
     setIsLogedIn,
     isLogedIn,
     setUserId,
+    setSocket,
   } = useContext(UserContext)
   const history = useHistory()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
   const usernameRef = useRef(null)
-
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
@@ -37,6 +38,8 @@ const Login = () => {
           setPassword('')
           usernameRef.current.focus()
         } else {
+          const socket = io()
+          setSocket(socket)
           setUserId(user._id)
           setIsLogedIn(true)
           history.push('/auctions')

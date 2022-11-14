@@ -1,20 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
+import Messages from '../Chat/Message/Messages'
 import Loader from '../Loader/Loader'
 import './Chat.css'
 import UserListItem from './UserListItem/UserListItem'
 
 import axios from 'axios'
-import io from 'socket.io-client'
 import { UserContext } from '../state/UserContext'
 
 const Chat = () => {
   const { isLoading, setIsLoading, userId } = useContext(UserContext)
   const [users, setUsers] = useState([])
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
-    const socket = io('http://localhost:8081')
-    socket.emit('join')
     axios
       .post(`/api/users/`, { userId })
       .then((res) => {
@@ -35,12 +34,19 @@ const Chat = () => {
     return <Loader />
   } else {
     const userList = users.map((el) => (
-      <UserListItem key={el.id} id={el.id} username={el.username} />
+      <UserListItem
+        key={el.id}
+        id={el.id}
+        username={el.username}
+        setMessages={setMessages}
+      />
     ))
     return (
       <div id="chatDiv">
         <div id="userListDiv">{userList}</div>
-        <div id="messegesDiv"></div>
+        <div id="messegesDiv">
+          <Messages messages={messages} />
+        </div>
       </div>
     )
   }
