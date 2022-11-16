@@ -73,6 +73,12 @@ app.post('/api/messages/get', (req, res) => {
     .catch(() => res.send([]))
 })
 
+app.put('/api/messages/put', (req, res) => {
+  db.uploadMessage(req.body)
+    .then((res) => res.send(res))
+    .catch((e) => res.send(e))
+})
+
 server.listen(port, () => {
   console.log('Server listening on port: ' + port)
 })

@@ -6,10 +6,12 @@
   border: 3px solid black;
   border-radius: 15px;
 }
+
 #userListDiv {
   float: left;
   cursor: pointer;
 }
+
 #messegesDiv {
   border: 2px solid #8a2be2;
   border-radius: 20px;
@@ -19,4 +21,34 @@
   float: left;
   height: 700px;
   width: 700px;
+  position: relative;
+}
+
+#inputMessage {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  margin-left: 10px;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0px;
+}
+
+#sendButton {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 30px;
+  color: white;
+  background-color: #8a2be2;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0px;
+  right: 5px;
 }

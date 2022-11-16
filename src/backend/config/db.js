@@ -104,6 +104,14 @@ const getMessages = async (req) => {
   return messages
 }
 
+const uploadMessage = async (message) => {
+  const db = client.db(dbName)
+  const Messages = db.collection('Messages')
+  await Messages.insertOne(message)
+    .then((res) => res)
+    .catch((e) => e)
+}
+
 module.exports = {
   connect,
   findUser,
@@ -113,4 +121,5 @@ module.exports = {
   uploadAuction,
   updateAuctionImage,
   updateAuctionPrize,
+  uploadMessage,
 }
