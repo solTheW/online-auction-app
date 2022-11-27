@@ -3,15 +3,18 @@ import { useContext } from 'react'
 import { UserContext } from '../../state/UserContext'
 import './UserListItem.css'
 const UserListItem = ({ id, username, setMessages, onClick, isActive }) => {
-  const { userId } = useContext(UserContext)
+  const { userId, setIsLoading, isLoading } = useContext(UserContext)
   const handleClick = () => {
+    setIsLoading(true);
     onClick(id)
     axios
       .post(`/api/messages/get`, { from: userId, to: id })
       .then((res) => {
         setMessages(res.data)
+        setIsLoading(false)
       })
       .catch(() => {
+        setIsLoading(false)
         setMessages([])
       })
   }

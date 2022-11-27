@@ -6,10 +6,11 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 import { ClipLoader } from 'react-spinners'
 import { UserContext } from '../../state/UserContext'
 import './AuctionItem.css'
-const AuctionItem = ({ id, name, image, value, desc, reload }) => {
+const AuctionItem = ({ id, name, image, value, desc }) => {
   const [counter, setCounter] = useState(value)
   const [imageUrl, setImageUrl] = useState(null)
-  const { firebaseConfig, isAdmin } = useContext(UserContext)
+  const [closed, setClosed] = useState(false)
+  const { firebaseConfig, isAdmin, socket, userId } = useContext(UserContext)
 
   useEffect(() => {
     const app = initializeApp(firebaseConfig)
@@ -24,7 +25,16 @@ const AuctionItem = ({ id, name, image, value, desc, reload }) => {
         console.error(e)
         setImageUrl('')
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      socket.on('auction-biting', (msg) => {
+        if(id === msg.id) {
+          setCounter(msg.newValue)
+        }
+      })
+      socket.on('auction-closing', (msg) => {
+        if(id === msg.id) {
+          setClosed(true)
+        }
+      })
   }, [])
 
   const handleCloseAuction = () => {
@@ -43,8 +53,8 @@ const AuctionItem = ({ id, name, image, value, desc, reload }) => {
           inProgress: false,
         })
         .then(() => {
-          alert('Auction closed')
-          reload()
+          socket.emit('auction-close', {id: id})
+          setClosed(true)
         })
         .catch((e) => alert(e))
     }
@@ -57,14 +67,17 @@ const AuctionItem = ({ id, name, image, value, desc, reload }) => {
       .put('/api/auction/updatePrize', {
         image: image,
         value: newValue,
+        lastBit: userId,
       })
       .then(() => {
-        console.log('Value updated for auction', id, name, image, value, desc)
+        socket.emit('auction-bit', {id: id, newValue: newValue})
+        console.log('Value updated for auction', id, name, image, newValue, desc)
       })
       .catch((e) => alert(e))
   }
 
   return (
+    !closed &&
     <div className="auctionDiv">
       {isAdmin && (
         <AiFillCloseCircle

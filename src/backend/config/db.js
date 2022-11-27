@@ -1,8 +1,7 @@
 const { MongoClient } = require('mongodb')
-const url =
-  'mongodb+srv://admin:admin@cluster0.puoic.mongodb.net/bachelor-thesis?retryWrites=true&w=majority'
-const client = new MongoClient(url, { useUnifiedTopology: true })
 const dbName = 'bachelor-thesis'
+const url = `mongodb+srv://admin:admin@cluster0.puoic.mongodb.net/${dbName}?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true`;
+const client = new MongoClient(url)
 
 const connect = async () => {
   try {
@@ -69,7 +68,7 @@ const updateAuctionPrize = async (auction) => {
   await Auctions.updateOne(
     { image: auction.image },
     {
-      $set: { value: Number.parseInt(auction.value) },
+      $set: { value: Number.parseInt(auction.value), lastBit: auction.lastBit },
       $currentDate: { lastModified: true },
     },
   )
@@ -96,10 +95,12 @@ const getUsers = async (userId) => {
 const getMessages = async (req) => {
   const db = client.db(dbName)
   const Messages = db.collection('Messages')
-  const response = await Messages.find({ from: req.from, to: req.to })
+  const response = await Messages.find({})
   const messages = []
   await response.forEach((el) => {
-    messages.push(el)
+    if((el.from === req.from && el.to === req.to) || (el.to === req.from && el.from === req.to)) {
+      messages.push(el)
+    }
   })
   return messages
 }

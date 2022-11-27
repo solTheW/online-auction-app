@@ -7,14 +7,13 @@ import AuctionItem from './AuctionItem/AuctionItem'
 import './Auctions.css'
 
 const Auctions = () => {
-  const { isLoading, setIsLoading } = useContext(UserContext)
+  const { isLoading, setIsLoading, socket } = useContext(UserContext)
   const [auctions, setAuctions] = useState([])
 
   useEffect(() => {
     getAuctions()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  
   const getAuctions = () => {
     setIsLoading(true)
     axios
@@ -41,7 +40,6 @@ const Auctions = () => {
           value={el.value}
           desc={el.desc}
           image={el.image}
-          reload={getAuctions}
         />
       )
     })

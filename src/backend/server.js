@@ -85,10 +85,12 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
   socket.on('chat-message', (msg) => {
-    console.log('chat-message', msg)
+      socket.broadcast.emit('chat-message-got', msg)
   })
-
-  socket.on('chat-get-message', (msg) => {
-    console.log('chat-get-message', msg)
+  socket.on('auction-close', (msg) => {
+    socket.broadcast.emit('auction-closing', msg)
+  })
+  socket.on('auction-bit', (msg) => {
+    socket.broadcast.emit('auction-biting', msg)
   })
 })
